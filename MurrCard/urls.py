@@ -1,6 +1,13 @@
 from django.urls import path
+from rest_framework import routers
 
 from MurrCard import views as murr_card
+from .viewsets import MurrViewSet, CommentViewSet
+
+router = routers.DefaultRouter()
+router.register(r'murrs', MurrViewSet, basename='murr')
+router.register(r'comments', CommentViewSet, basename='comment')
+
 
 urlpatterns = [
     path('', murr_card.murr_list, name='murr_list'),
@@ -22,3 +29,5 @@ urlpatterns = [
     path('murr_action/', murr_card.murr_action),
     path('search/', murr_card.search, name='search'),
 ]
+
+urlpatterns += router.urls

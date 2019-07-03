@@ -57,6 +57,10 @@ class Murr(models.Model):
         return Comment.objects.filter(murr=self).count()
 
     @property
+    def likes_count(self):
+        return Like.objects.filter(murr=self).count()
+
+    @property
     def cover_url(self):
         if self.cover and hasattr(self.cover, 'url'):
             return self.cover.url
